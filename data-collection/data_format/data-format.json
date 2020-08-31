@@ -1,0 +1,42 @@
+{
+  "ap": "xxxx", // 项目数据来源 app，pc
+  "cm": { //公共字段
+    "mid": "", //(String) 设备唯一标识
+    "uid": "", // (String) 用户标识
+    "vc": "1", // (String)versionCode，程序版本号
+    "vn": "1.0", // (String) versionName, 程序版本名
+    "l": "zh", // (String) language, 系统语言
+    "sr": "", // (String) 渠道号，应用从哪个渠道来的
+    "os": "7.1.1", // (String) Android系统版本
+    "ar": "CN", // (String) area区域
+    "md": "BBBB100-1", // (String) model，手机型号
+    "ba": "balckberry", // (String) brand, 手机品牌
+    "sv": "V2.2.1", // (String) sdkVersion
+    "g": "", // (String) gmail
+    "hw": "1620x1080", //(String) heightXwidth 屏幕宽高
+    "t": "11506047606608", // (String) 客户端日志产生时间
+    "nw": "WIFI", // (String) 网络模式
+    "ln": 0, // (double) lng 经度
+    "la": 0 // (double) lat 纬度
+  },
+  "et": [ // 事件
+    {
+      "ett": "11506073353534", // 客户端事件产生时间
+      "en": "display", //时间名称
+      "kv": { // 事件结果，以Key-Value形式自定义
+        "goodsid": "236",
+        "action": "1",
+        "extend1": "1",
+        "place": "2",
+        "category": "75"
+      }
+    },
+    {
+      "ett": "11506073353535",
+      "en": "active_background",
+      "kv": {
+        "active_source": "1"
+      }
+    }
+  ]
+}
