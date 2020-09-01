@@ -5,53 +5,53 @@ package com.yglong.data.collection.bean;
  */
 public class AppDisplay {
     //动作：曝光商品=1，点击商品=2
-    private int action;
+    private String action;
     //商品ID（服务端发下的ID）
-    private int goodsid;
+    private String goodsid;
     //顺序（第几条商品，第一条为0，第二条为1，如此类推）
-    private int place;
+    private String place;
     //曝光类型：1-首次曝光，2-重复曝光
-    private int extend1;
+    private String extend1;
     //分类ID（服务端定义的分类ID）
-    private int category;
+    private String category;
 
-    public int getAction() {
+    public String getAction() {
         return action;
     }
 
-    public void setAction(int action) {
+    public void setAction(String action) {
         this.action = action;
     }
 
-    public int getGoodsid() {
+    public String getGoodsid() {
         return goodsid;
     }
 
-    public void setGoodsid(int goodsid) {
+    public void setGoodsid(String goodsid) {
         this.goodsid = goodsid;
     }
 
-    public int getPlace() {
+    public String getPlace() {
         return place;
     }
 
-    public void setPlace(int place) {
+    public void setPlace(String place) {
         this.place = place;
     }
 
-    public int getExtend1() {
+    public String getExtend1() {
         return extend1;
     }
 
-    public void setExtend1(int extend1) {
+    public void setExtend1(String extend1) {
         this.extend1 = extend1;
     }
 
-    public int getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 }

@@ -13,8 +13,14 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class AppMain {
 
+    private static Random random = new Random();
+
+    private static int sMid = 0;
+    private static int goodSid = 0;
+    private static int uid = 0;
+
     public static void main(String[] args) {
-        int interval = 0;
+        long interval = 0;
         int number = 1000;
         if (args.length > 0) {
             interval = Integer.parseInt(args[0]);
@@ -23,7 +29,11 @@ public class AppMain {
             number = Integer.parseInt(args[1]);
         }
 
-        Random random = new Random();
+        generateLog(interval, number);
+
+    }
+
+    private static void generateLog(long interval, int number) {
         for (int i = 0; i < number; i++) {
             Object obj = null;
             if (random.nextBoolean()) {
@@ -43,7 +53,6 @@ public class AppMain {
                 }
             }
         }
-
     }
 
     private static Object generateEventLog() {
@@ -170,7 +179,7 @@ public class AppMain {
         AppBase appBase = generateAppBase();
         Random random = new Random();
         start.setEn("start");
-        start.setAction(random.nextBoolean() ? 1 : 2);
+        start.setAction(random.nextBoolean() ? "1" : "2");
         return start;
     }
 }

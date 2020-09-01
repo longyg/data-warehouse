@@ -5,13 +5,13 @@ package com.yglong.data.collection.bean;
  */
 public class AppActiveBackground {
     //1=upgrade，2=download，3=plugin_upgrade
-    private int activeSource;
+    private String activeSource;
 
-    public int getActiveSource() {
+    public String getActiveSource() {
         return activeSource;
     }
 
-    public void setActiveSource(int activeSource) {
+    public void setActiveSource(String activeSource) {
         this.activeSource = activeSource;
     }
 }

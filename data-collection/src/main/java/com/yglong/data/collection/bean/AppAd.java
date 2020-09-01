@@ -5,63 +5,63 @@ package com.yglong.data.collection.bean;
  */
 public class AppAd {
     //入口：商品列表页=1，应用首页=2，商品详情页=3
-    private int entry;
+    private String entry;
     // 动作：广告展示=1，广告点击=2
-    private int action;
+    private String action;
     //Type：1=商品， 2=营销活动
-    private int contentType;
+    private String contentType;
     //展示时长：毫秒数
-    private long displayMills;
+    private String displayMills;
     //商品ID
-    private int itemId;
+    private String itemId;
     //营销活动ID
-    private int activityId;
+    private String activityId;
 
-    public int getEntry() {
+    public String getEntry() {
         return entry;
     }
 
-    public void setEntry(int entry) {
+    public void setEntry(String entry) {
         this.entry = entry;
     }
 
-    public int getAction() {
+    public String getAction() {
         return action;
     }
 
-    public void setAction(int action) {
+    public void setAction(String action) {
         this.action = action;
     }
 
-    public int getContentType() {
+    public String getContentType() {
         return contentType;
     }
 
-    public void setContentType(int contentType) {
+    public void setContentType(String contentType) {
         this.contentType = contentType;
     }
 
-    public long getDisplayMills() {
+    public String getDisplayMills() {
         return displayMills;
     }
 
-    public void setDisplayMills(long displayMills) {
+    public void setDisplayMills(String displayMills) {
         this.displayMills = displayMills;
     }
 
-    public int getItemId() {
+    public String getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(String itemId) {
         this.itemId = itemId;
     }
 
-    public int getActivityId() {
+    public String getActivityId() {
         return activityId;
     }
 
-    public void setActivityId(int activityId) {
+    public void setActivityId(String activityId) {
         this.activityId = activityId;
     }
 }

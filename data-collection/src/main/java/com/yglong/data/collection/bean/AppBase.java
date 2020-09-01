@@ -35,9 +35,9 @@ public class AppBase {
     //网络模式
     private String nw;
     //lng 经度
-    private double ln;
+    private String ln;
     //lat 纬度
-    private double la;
+    private String la;
 
     public String getMid() {
         return mid;
@@ -159,19 +159,19 @@ public class AppBase {
         this.nw = nw;
     }
 
-    public double getLn() {
+    public String getLn() {
         return ln;
     }
 
-    public void setLn(double ln) {
+    public void setLn(String ln) {
         this.ln = ln;
     }
 
-    public double getLa() {
+    public String getLa() {
         return la;
     }
 
-    public void setLa(double la) {
+    public void setLa(String la) {
         this.la = la;
     }
 }
