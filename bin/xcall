@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+for i in bigdata01 bigdata02 bigdata03; do
+  echo "-------------- $i --------------"
+  ssh $i "$*"
+done
