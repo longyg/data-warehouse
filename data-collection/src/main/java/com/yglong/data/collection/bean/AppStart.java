@@ -16,6 +16,8 @@ public class AppStart extends AppBase {
     private String detail;
     //失败的message（没有则上报空）
     private String extend1;
+    //日志类型：start
+    private String en;
 
     public String getEntry() {
         return entry;
@@ -72,7 +74,4 @@ public class AppStart extends AppBase {
     public void setEn(String en) {
         this.en = en;
     }
-
-    //日志类型：start
-    private String en;
 }

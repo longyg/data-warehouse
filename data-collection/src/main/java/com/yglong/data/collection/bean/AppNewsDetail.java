@@ -11,7 +11,7 @@ public class AppNewsDetail {
     //商品ID（服务端下发的ID）
     private String goodsid;
     //商品样式：0、无图，1、一张大图，2、两张图，3、三张小图，4、一张小图，5、一张大图两张小图
-    private String showStyle;
+    private String showType;
     //页面停留时长：从商品开始加载时开始计算，用到户关闭页面所有的时间。
     // 若中途用跳转到其他页面了，则暂停计时，待回到详情页时恢复计时。
     // 或中途划出的时间超过10秒，则本次计时作废，不上报本次数据。如未加载成功退出，则保空
@@ -47,12 +47,12 @@ public class AppNewsDetail {
         this.goodsid = goodsid;
     }
 
-    public String getShowStyle() {
-        return showStyle;
+    public String getShowType() {
+        return showType;
     }
 
-    public void setShowStyle(String showStyle) {
-        this.showStyle = showStyle;
+    public void setShowType(String showType) {
+        this.showType = showType;
     }
 
     public String getNewsStayTime() {

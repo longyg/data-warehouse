@@ -12,9 +12,9 @@
             <pattern>%msg%n</pattern>
             <charset>utf-8</charset>
         </encoder>
-        <file>tmp/log/output.log</file>
+        <file>/tmp/log/output.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>tmp/log/output.log.%i</fileNamePattern>
+            <fileNamePattern>/tmp/log/output.log.%i</fileNamePattern>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <MaxFileSize>10MB</MaxFileSize>
