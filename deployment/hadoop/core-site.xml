@@ -1,0 +1,57 @@
+<configuration>
+    <!-- Hadoop工作目录,用于存放Hadoop运行时NameNode、DataNode产生的数据 -->
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/opt/hadoopdata</value>
+    </property>
+    <!-- 默认NameNode,使用NameService的名称 -->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://hdcluster</value>
+    </property>
+    <!--hdfs数据缓冲区大小-->
+    <property>
+        <name>io.file.buffer.size</name>
+        <value>4096</value>
+    </property>
+    <!--hdfs垃圾箱(.Trash)创建检查点的时间间隔，应小于或等于fs.trash.interval;默认为0， 由fs.trash.interval项指定 -->
+    <property>
+        <name>fs.trash.checkpoint.interval</name>
+        <value>0</value>
+    </property>
+    <!-- 开启Hadoop的回收站机制,当删除HDFS中的文件时,文件将会被移动到回收站(/usr/<username>/.Trash),在指定的时间过后再对其进行删除,此机制可以防止文件被误删除 -->
+    <property>
+        <name>fs.trash.interval</name>
+        <!-- 单位是分钟 -->
+        <value>1440</value>
+    </property>
+    <!-- 配置Zookeeper地址-->
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>bigdata01:2181,bigdata02:2181,bigdata03:2181</value>
+    </property>
+    <!--zookeeper超时时间间隔-->
+    <property>
+        <name>ha.zookeeper.session-timeout.ms</name>
+        <value>2000</value>
+    </property>
+    <!-- 在网页界面访问数据时使用的用户 -->
+    <property>
+        <name>hadoop.http.staticuser.user</name>
+        <value>bigdata</value>
+    </property>
+    <!--压缩和解压的方式-->
+    <property>
+        <name>io.compression.codecs</name>
+        <value>org.apache.hadoop.io.compress.GzipCodec, org.apache.hadoop.io.compress.DefaultCodec, org.apache.hadoop.io.compress.BZip2Codec, org.apache.hadoop.io.compress.SnappyCodec</value>
+    </property>
+
+    <property>
+        <name>hadoop.proxyuser.bigdata.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.bigdata.groups</name>
+        <value>*</value>
+    </property>
+</configuration>

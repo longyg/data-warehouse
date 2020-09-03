@@ -1,0 +1,151 @@
+<configuration>
+    <!--指定hdfs的nameservice，需要和core-site.xml中的保持一致 -->
+    <property>
+        <name>dfs.nameservices</name>
+        <value>hdcluster</value>
+    </property>
+    <!-- 指定NameService下两个NameNode的名称 -->
+    <property>
+        <name>dfs.ha.namenodes.hdcluster</name>
+        <value>nn1,nn2</value>
+    </property>
+    <!-- 分别指定两个NameNode的RPC通讯地址 -->
+    <property>
+        <name>dfs.namenode.rpc-address.hdcluster.nn1</name>
+        <value>bigdata01:8020</value>
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-address.hdcluster.nn2</name>
+        <value>bigdata02:8020</value>
+    </property>
+    <!-- 分别指定两个NameNode的Web监控页面地址 -->
+    <property>
+        <name>dfs.namenode.http-address.hdcluster.nn1</name>
+        <value>bigdata01:9870</value>
+    </property>
+    <property>
+        <name>dfs.namenode.http-address.hdcluster.nn2</name>
+        <value>bigdata02:9870</value>
+    </property>
+    <!-- 指定NameNode编辑日志存储在JournalNode集群中的目录-->
+    <property>
+        <name>dfs.namenode.shared.edits.dir</name>
+        <value>qjournal://bigdata01:8485;bigdata02:8485;bigdata03:8485/hdcluster</value>
+    </property>
+    <!-- 指定JournalNode在本地磁盘存放数据的位置 -->
+    <!-- 在journalNode机器上要建立该目录 -->
+    <property>
+        <name>dfs.journalnode.edits.dir</name>
+        <value>/opt/journalnode/data</value>
+    </property>
+    <!-- 开启NameNode故障时自动切换-->
+    <property>
+        <name>dfs.ha.automatic-failover.enabled</name>
+        <value>true</value>
+    </property>
+    <!-- 配置NameNode失败自动切换的方式-->
+    <property>
+        <name>dfs.client.failover.proxy.provider.hdcluster</name>
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+    </property>
+    <!-- 配置隔离机制-->
+    <property>
+        <name>dfs.ha.fencing.methods</name>
+        <value>sshfence</value>
+    </property>
+    <!-- 由于使用SSH, 使用隔离机制时需要ssh免登陆, 那么需要指定密钥的位置-->
+    <property>
+        <name>dfs.ha.fencing.ssh.private-key-files</name>
+        <value>/home/bigdata/.ssh/id_rsa</value>
+    </property>
+    <!-- 文件在HDFS中的备份数(小于等于NameNode) -->
+    <property>
+        <name>dfs.replication</name>
+        <value>3</value>
+    </property>
+    <!-- 在NN和DN上开启WebHDFS (REST API)功能,不是必须 -->
+    <property>
+        <name>dfs.webhdfs.enabled</name>
+        <value>true</value>
+    </property>
+    <!-- 在dfsclient中记录慢io警告的阈值-->
+    <property>
+        <name>dfs.client.slow.io.warning.threshold.ms</name>
+        <value>90000</value>
+    </property>
+    <!-- datanode的心跳时间间隔，单位为秒-->
+    <property>
+        <name>dfs.heartbeat.interval</name>
+        <value>8</value>
+    </property>
+    <!-- 心跳检测的时间间隔，单位是毫秒-->
+    <property>
+        <name>dfs.namenode.heartbeat.recheck-interval</name>
+        <value>90000</value>
+    </property>
+    <!-- namenode的checkpoint周期，单位秒。HA部署时，每经过一个周期，standby节点进行fsimage和editlog的合并-->
+    <property>
+        <name>dfs.namenode.checkpoint.preiod</name>
+        <value>3600</value>
+    </property>
+    <!-- namenode的checkpoint的最大操作次数。HA部署时，hdfs操作次数超过这个数量，standby节点进行fsimage和editlog的合并-->
+    <property>
+        <name>dfs.namenode.checkpoint.txns</name>
+        <value>1000000</value>
+    </property>
+    <!--块报告的时间间隔，单位是毫秒-->
+    <property>
+        <name>dfs.blockreport.intervalMsec</name>
+        <value>1800000</value>
+    </property>
+    <!--datanode以秒为单位扫描数据目录，并协调内存块和磁盘上的块之间的差异-->
+    <property>
+        <name>dfs.datanode.directoryscan.interval</name>
+        <value>1800</value>
+    </property>
+    <property>
+        <name>dfs.datanode.max.xcievers</name>
+        <value>8000</value>
+    </property>
+    <!-- 每个DataNode平衡操作所允许的最大使用带宽，单位是byte.这个参数在守护进程启动的时候读入，管理员无法在平衡运行时来修改这个值，重启hdfs后生效：stop-dfs.sh start-dfs.sh-->
+    <property>
+        <name>dfs.balance.bandwidthPerSec</name>
+        <value>10485760</value>
+    </property>
+    <!-- 新文件的块大小，单位为字节.可使用后缀：k(kilo), m(mega), g(giga), t(tera), p(peta), e(exa) -->
+    <property>
+        <name>dfs.blocksize</name>
+        <value>67108864</value>
+    </property>
+    <!-- RPC服务器的监听client线程数， 默认为10-->
+    <!-- 一般为 20 * log(datanode个数) -->
+    <property>
+        <name>dfs.namenode.handler.count</name>
+        <value>22</value>
+    </property>
+    <!-- datanode进行传输数据的最大线程数 -->
+    <property>
+        <name>dfs.datanode.max.transfer.threads</name>
+        <value>36867</value>
+    </property>
+    <!-- 线程池中用于编制卷报告的线程数。 -->
+    <property>
+        <name>dfs.datanode.directoryscan.threads</name>
+        <value>18</value>
+    </property>
+    <!--  datanode的服务器线程数-->
+    <property>
+        <name>dfs.datanode.handler.count</name>
+        <value>128</value>
+    </property>
+    <!--在datanode中记录慢io警告的阈值-->
+    <property>
+        <name>dfs.datanode.slow.io.warning.threshold.ms</name>
+        <value>1000</value>
+    </property>
+    <!-- 关闭HDFS的访问权限 -->
+    <property>
+        <name>dfs.permissions.enabled</name>
+        <value>false</value>
+    </property>
+</configuration>

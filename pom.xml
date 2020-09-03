@@ -16,7 +16,7 @@
     </properties>
 
     <modules>
-        <module>data-collection</module>
+        <module>log-generator</module>
         <module>flume-interceptor</module>
     </modules>
 

@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+#########################################
+#
+# Call command on all nodes
+#
+# Usage:
+#      xcall <command>
+# Example:
+#      xcall jps
+#
+#########################################
+
 NODES="bigdata01 bigdata02 bigdata03"
 
 for i in $NODES; do

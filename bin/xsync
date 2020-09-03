@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+#########################################
+#
+# Synchronize files or folder between nodes
+#
+# Usage:
+#      cd <path>
+#      xsync <file|dir>
+#
+#########################################
+
 # $#：表示传递给脚本或函数的参数个数。
 #1 获取输入参数个数，如果没有参数，直接退出
 

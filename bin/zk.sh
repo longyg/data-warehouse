@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-# start or stop zookeeper cluster
-# It can be executed on any one node of the cluster with non-root user
-
-# zk.sh start|stop|status
+#########################################
+#
+# start, stop or check status of zookeeper cluster
+#
+# Usage:
+#      zk.sh start|stop|status
+#
+#########################################
 
 ZK_NODES="bigdata01 bigdata02 bigdata03"
 ZK_HOME="/opt/software/zookeeper"

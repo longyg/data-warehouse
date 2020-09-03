@@ -1,0 +1,31 @@
+<configuration>
+    <!-- 在hdfs中用于持久化hbase数据的目录 -->
+    <property>
+        <name>hbase.rootdir</name>
+        <value>hdfs://hdcluster/hbase</value>
+    </property>
+
+    <!-- 是否分布式运行，false即为单机 -->
+    <property>
+        <name>hbase.cluster.distributed</name>
+        <value>true</value>
+    </property>
+
+    <!-- zookeeper地址 -->
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>bigdata01,bigdata02,bigdata03</value>
+    </property>
+
+    <!-- zookeeper配置信息快照的位置 -->
+    <property>
+        <name>hbase.zookeeper.property.dataDir</name>
+        <value>/opt/zk-data</value>
+    </property>
+
+    <!-- 不配置无法启动HBASE -->
+    <property>
+        <name>hbase.unsafe.stream.capability.enforce</name>
+        <value>false</value>
+    </property>
+</configuration>

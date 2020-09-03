@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+#########################################
+#
+# Start or stop flume log collection
+#
+# Usage:
+#      f1.sh start|stop
+#
+#########################################
+
 FLUME_NODES="bigdata01 bigdata02"
 FLUME_HOME=/opt/software/flume
 FLUME_BIN_DIR=$FLUME_HOME/bin

@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+#########################################
+#
+# Start or stop kafka cluster
+#
+# Usage:
+#      kf.sh start|stop
+#
+#########################################
+
 KAFKA_NODES="bigdata01 bigdata02 bigdata03"
 KAFKA_HOME_DIR=/opt/software/kafka
 
