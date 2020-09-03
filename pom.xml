@@ -17,6 +17,7 @@
 
     <modules>
         <module>data-collection</module>
+        <module>flume-interceptor</module>
     </modules>
 
 

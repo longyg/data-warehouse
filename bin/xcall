@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-for i in bigdata01 bigdata02 bigdata03; do
+NODES="bigdata01 bigdata02 bigdata03"
+
+for i in $NODES; do
   echo "-------------- $i --------------"
   ssh $i "$*"
 done
