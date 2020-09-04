@@ -17,13 +17,12 @@
 #   - This script is only tested on Ubuntu 18.04
 #
 ###############################################################################
-KAFKA_NODES=("bigdata01" "bigdata02" "bigdata03")
-KAFKA_USER_NAME="bigdata"
-KAFKA_GROUP_NAME="bigdata"
-INSTALL_DIR="/opt/software"
+INSTALL_DIR=$1
+KAFKA_NODES=($2)
+KAFKA_USER_NAME=$3
+KAFKA_GROUP_NAME=$4
+DOWNLOAD_DIR=$5
 KAFKA_HOME_DIR="$INSTALL_DIR/kafka"
-DOWNLOAD_DIR="/root/download"
-ZK_SERVERS="bigdata01:2181,bigdata02:2181,bigdata03:2181"
 
 echo "Downloading kafka..."
 mkdir -p $DOWNLOAD_DIR
@@ -63,6 +62,13 @@ mkdir logs
 KAFKA_DATA_LOG_DIR=$KAFKA_HOME_DIR/logs
 
 echo "Configuring server.properties..."
+# bigdata01:2181,bigdata02:2181,bigdata03:2181
+ZK_SERVERS=""
+for node in ${KAFKA_NODES[@]}; do
+  ZK_SERVERS="$ZK_SERVERS$node:2181,"
+done
+ZK_SERVERS=${ZK_SERVERS%?}
+
 sed -i "/zookeeper.connect=/czookeeper.connect=$ZK_SERVERS" $KAFKA_HOME_DIR/config/server.properties
 sed -i "/log.dirs=/clog.dirs=$KAFKA_DATA_LOG_DIR" $KAFKA_HOME_DIR/config/server.properties
 echo "delete.topic.enable=true" >> $KAFKA_HOME_DIR/config/server.properties

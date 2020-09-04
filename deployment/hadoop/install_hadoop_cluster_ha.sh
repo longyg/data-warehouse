@@ -6,11 +6,11 @@
 # Also NameNode HA and ResourceManager HA are both enabled
 #
 # Prerequisites:
-#	  - JDK is installed and JAVA_HOME env is configured
+#   - JDK is installed and JAVA_HOME env is configured
 #   - Zookeeper cluster is running
 #   - hostname is configured for every node
-#	  - ssh login without password between all nodes is configured for both
-#	    root and non-root user
+#   - ssh login without password between all nodes is configured for both
+#     root and non-root user
 #
 # Note:
 #   - This script must be executed on first node, e.g. bigdata01
@@ -19,16 +19,17 @@
 #
 ###############################################################################
 
-HADOOP_NODES=("bigdata01" "bigdata02" "bigdata03")
-HADOOP_USER_NAME="bigdata"
-HADOOP_GROUP_NAME="bigdata"
-JAVA_HOME_DIR=$(echo $JAVA_HOME)
-INSTALL_DIR="/opt/software"
+INSTALL_DIR=$1
+HADOOP_NODES=($2)
+HADOOP_USER_NAME=$3
+HADOOP_GROUP_NAME=$4
+DOWNLOAD_DIR=$5
 HADOOP_HOME_DIR="$INSTALL_DIR/hadoop"
+JAVA_HOME_DIR=$(echo $JAVA_HOME)
 HADOOP_ROOT_DIR="/opt"
 HADOOP_DATA_DIR="$HADOOP_ROOT_DIR/hadoopdata"
 HADOOP_JOURNALNODE_DATA_DIR="$HADOOP_ROOT_DIR/journalnode/data"
-DOWNLOAD_DIR="/root/download"
+
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 
 echo "Downloading hadoop..."

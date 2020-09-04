@@ -18,13 +18,13 @@
 ###############################################################################
 
 # only install on two nodes
-FLUME_NODES=("bigdata01" "bigdata02" "bigdata03")
-FLUME_USER_NAME="bigdata"
-FLUME_GROUP_NAME="bigdata"
+INSTALL_DIR=$1
+FLUME_NODES=($2)
+FLUME_USER_NAME=$3
+FLUME_GROUP_NAME=$4
+DOWNLOAD_DIR=$5
 JAVA_HOME_DIR=$(echo $JAVA_HOME)
-INSTALL_DIR="/opt/software"
 FLUME_HOME_DIR="$INSTALL_DIR/flume"
-DOWNLOAD_DIR="/root/download"
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 
 echo "Downloading flume..."

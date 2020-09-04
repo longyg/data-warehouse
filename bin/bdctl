@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+
+###############################################################################
+#
+# Bigdata framework controller, called bdctl
+#
+# Orchestration script for start, stop or check status of bigdata frameworks
+#
+# Usage:
+#      dbctl all|kafka|hive|hbase|hadoop|zookeeper start|stop|status
+#
+###############################################################################
+CLUSTER_NODES="bigdata01 bigdata02 bigdata03"
+FIRST_NODE="bigdata01" # hive and phoenix is running only on first node
+
+case $1 in
+"kafka") {
+	case $2 in
+	"start") {
+		kf.sh start "$CLUSTER_NODES"
+	};;
+	"stop") {
+		kf.sh stop "$CLUSTER_NODES"
+	};;
+	"status") {
+		kf.sh status "$CLUSTER_NODES"
+	};;
+	esac
+};;
+"hive") {
+	case $2 in
+	"start") {
+		hv.sh start $FIRST_NODE
+	};;
+	"stop") {
+		hv.sh stop $FIRST_NODE
+	};;
+	"status") {
+		hv.sh status $FIRST_NODE
+	};;
+	esac
+};;
+"hbase") {
+	case $2 in
+	"start") {
+		hb.sh start
+	};;
+	"stop") {
+		hb.sh stop
+	};;
+	"status") {
+		hb.sh status
+	};;
+	esac
+};;
+"hadoop") {
+	case $2 in
+	"start") {
+		hd.sh start "$CLUSTER_NODES"
+	};;
+	"stop") {
+		hd.sh stop "$CLUSTER_NODES"
+	};;
+	"status") {
+		hd.sh status "$CLUSTER_NODES"
+	};;
+	esac
+};;
+"zookeeper") {
+	case $2 in
+	"start") {
+		zk.sh start "$CLUSTER_NODES"
+	};;
+	"stop") {
+		zk.sh stop "$CLUSTER_NODES"
+	};;
+	"status") {
+		zk.sh status "$CLUSTER_NODES"
+	};;
+	esac
+};;
+"all") {
+	case $2 in
+	"start") {
+		zk.sh start "$CLUSTER_NODES"
+		kf.sh start "$CLUSTER_NODES"
+		hd.sh start "$CLUSTER_NODES"
+		hv.sh start $FIRST_NODE
+		hb.sh start
+	};;
+	"stop") {
+		hb.sh stop
+		hv.sh stop $FIRST_NODE
+		hd.sh stop "$CLUSTER_NODES"
+		kf.sh stop "$CLUSTER_NODES"
+		zk.sh stop "$CLUSTER_NODES"
+	};;
+	"status") {
+		hb.sh status
+		hv.sh status $FIRST_NODE
+		hd.sh status "$CLUSTER_NODES"
+		kf.sh status "$CLUSTER_NODES"
+		zk.sh status "$CLUSTER_NODES"
+	};;
+	esac
+};;
+esac

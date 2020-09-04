@@ -5,11 +5,11 @@
 #
 # Prerequisites:
 #   - Hadoop is installed and running
-#	  - JDK is installed and JAVA_HOME env is configured
+#   - JDK is installed and JAVA_HOME env is configured
 #   - MYSQL is installed and dedicated meta database is created (e.g., hive) and
 #     user/password (e.g., hive) is created
 #   - hostname is configured for every node
-#	  - ssh login without password between all nodes is configured for both
+#   - ssh login without password between all nodes is configured for both
 #	    root and non-root user
 #
 # Note:
@@ -19,12 +19,12 @@
 #   - Hive 3.1.2 is compatible with Hadoop 3.x.y
 #
 ###############################################################################
-HIVE_USER_NAME="bigdata"
-HIVE_GROUP_NAME="bigdata"
+INSTALL_DIR=$1
+HIVE_USER_NAME=$2
+HIVE_GROUP_NAME=$3
+DOWNLOAD_DIR=$4
 JAVA_HOME_DIR=$(echo $JAVA_HOME)
-INSTALL_DIR="/opt/software"
 HIVE_HOME_DIR="$INSTALL_DIR/hive"
-DOWNLOAD_DIR="/root/download"
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 
 echo "Downloading hive..."
@@ -79,9 +79,9 @@ drop database if exists hive;
 EOF
 
 echo "Initializing mysql schema..."
-su - $HBASE_USER_NAME -c "schematool -dbType mysql -initSchema"
+su - $HIVE_USER_NAME -c "schematool -dbType mysql -initSchema"
 
-su - $HBASE_USER_NAME -c "hive --version"
+su - $HIVE_USER_NAME -c "hive --version"
 
 echo "Starting hiveserver2..."
-su - $HBASE_USER_NAME -c "nohup hive --service hiveserver2 >/dev/null 2>&1 &"
+su - $HIVE_USER_NAME -c "nohup hive --service hiveserver2 >/dev/null 2>&1 &"

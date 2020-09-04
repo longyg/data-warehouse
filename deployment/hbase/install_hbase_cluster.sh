@@ -23,14 +23,15 @@
 #   - all nodes are region servers
 #
 ###############################################################################
-HBASE_NODES=("bigdata01" "bigdata02" "bigdata03")
-HBASE_USER_NAME="bigdata"
-HBASE_GROUP_NAME="bigdata"
+INSTALL_DIR=$1
+HBASE_NODES=($2)
+HBASE_USER_NAME=$3
+HBASE_GROUP_NAME=$4
+DOWNLOAD_DIR=$5
 JAVA_HOME_DIR=$(echo $JAVA_HOME)
-INSTALL_DIR="/opt/software"
 HBASE_HOME_DIR="$INSTALL_DIR/hbase"
 HADOOP_HOME_DIR="$INSTALL_DIR/hadoop"
-DOWNLOAD_DIR="/root/download"
+
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 MASTER_BACKUP_NODE=${HBASE_NODES[1]}
 
