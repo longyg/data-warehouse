@@ -39,10 +39,10 @@ case $1 in
   $CUR_DIR/kafka/install_kafka_cluster.sh
 };;
 "zookeeper") {
-  $CUR_DIR/zookeeper/install_zookeeper_cluster.sh $INSTALL_DIR $CLUSTER_NODES $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
+  $CUR_DIR/zookeeper/install_zookeeper_cluster.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
 };;
 "all") {
-  $CUR_DIR/zookeeper/install_zookeeper_cluster.sh $INSTALL_DIR $CLUSTER_NODES $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
+  $CUR_DIR/zookeeper/install_zookeeper_cluster.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
   $CUR_DIR/hadoop/install_hadoop_cluster_ha.sh
   $CUR_DIR/hbase/install_hbase_cluster.sh
   $CUR_DIR/hive/install_hive.sh
