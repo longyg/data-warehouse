@@ -1,5 +1,6 @@
 package com.yglong.flume.interceptor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.interceptor.Interceptor;
@@ -9,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class LogETLInterceptor implements Interceptor {
     @Override
     public void initialize() {
@@ -18,13 +20,15 @@ public class LogETLInterceptor implements Interceptor {
     @Override
     public Event intercept(Event event) {
         byte[] body = event.getBody();
-        String log = new String(body, StandardCharsets.UTF_8);
-        if (log.contains("start")) {
-            if (LogUtils.validateStart(log)) {
+        String str = new String(body, StandardCharsets.UTF_8);
+        if (str.contains("start")) {
+            if (LogUtils.validateStart(str)) {
+                log.info("Valid start log: " + str);
                 return event;
             }
         } else {
-            if (LogUtils.validateEvent(log)) {
+            if (LogUtils.validateEvent(str)) {
+                log.info("Valid event log: " + str);
                 return event;
             }
         }
