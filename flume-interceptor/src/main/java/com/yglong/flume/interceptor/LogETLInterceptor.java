@@ -5,7 +5,6 @@ import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.interceptor.Interceptor;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +22,10 @@ public class LogETLInterceptor implements Interceptor {
         String str = new String(body, StandardCharsets.UTF_8);
         if (str.contains("start")) {
             if (LogUtils.validateStart(str)) {
-                log.info("Valid start log: " + str);
                 return event;
             }
         } else {
             if (LogUtils.validateEvent(str)) {
-                log.info("Valid event log: " + str);
                 return event;
             }
         }
@@ -44,12 +41,13 @@ public class LogETLInterceptor implements Interceptor {
                 events.add(event);
             }
         }
+        log.info("===> ETL intercept");
         return events;
     }
 
     @Override
     public void close() {
-
+        log.info("======> ETL close");
     }
 
     public static  class Builder implements Interceptor.Builder {

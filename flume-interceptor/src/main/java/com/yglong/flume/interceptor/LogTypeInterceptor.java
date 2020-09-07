@@ -14,7 +14,7 @@ import java.util.Map;
 public class LogTypeInterceptor implements Interceptor {
     @Override
     public void initialize() {
-
+        log.info("====> type initialize");
     }
 
     @Override
@@ -23,12 +23,12 @@ public class LogTypeInterceptor implements Interceptor {
         String str = new String(body, StandardCharsets.UTF_8);
         Map<String, String> headers = event.getHeaders();
         if (str.contains("start")) {
-            log.info("Start log: " + str);
-            headers.put("topic", "topic_start");
+            headers.put("state", "mystart");
         } else {
-            log.info("Event log: " + str);
-            headers.put("topic", "topic_event");
+            headers.put("state", "myevent");
         }
+        log.info("====> set headers " + headers);
+        event.setHeaders(headers);
         return event;
     }
 
@@ -39,24 +39,28 @@ public class LogTypeInterceptor implements Interceptor {
             Event event = intercept(e);
             events.add(event);
         }
+        log.info("==============> Type result events: " + events.size());
+        log.info("==============> " + events.get(0).getHeaders());
         return events;
     }
 
     @Override
     public void close() {
-
+        log.info("==========> type close");
     }
 
     public static class Builder implements Interceptor.Builder {
 
         @Override
         public Interceptor build() {
+            log.info("=====> new type interceptor");
             return new LogTypeInterceptor();
         }
 
         @Override
         public void configure(Context context) {
-
+            String topic = context.getString("topic");
+            log.info("=======> context: " + topic);
         }
     }
 }
