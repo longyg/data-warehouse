@@ -25,6 +25,7 @@ FLUME_GROUP_NAME=$4
 DOWNLOAD_DIR=$5
 JAVA_HOME_DIR=$(echo $JAVA_HOME)
 FLUME_HOME_DIR="$INSTALL_DIR/flume"
+HADOOP_HOME_DIR="$INSTALL_DIR/hadoop"
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 
 echo "Downloading flume..."
@@ -62,7 +63,15 @@ echo $FLUME_HOME
 echo "Configuring flume-env.sh..."
 mv $FLUME_HOME_DIR/conf/flume-env.sh.template $FLUME_HOME_DIR/conf/flume-env.sh
 echo "export JAVA_HOME=$JAVA_HOME_DIR" >> $FLUME_HOME_DIR/conf/flume-env.sh
+echo "HADOOP_HOME=$HADOOP_HOME_DIR" >> $FLUME_HOME_DIR/conf/flume-env.sh
+echo "FLUME_CLASSPATH=\$FLUME_CLASSPATH:\$HADOOP_HOME/share/hadoop/hdfs/*.jar:\$HADOOP_HOME/share/hadoop/common/*.jar:\$HADOOP_HOME/share/hadoop/common/lib/*.jar:\$HADOOP_HOME/share/hadoop/hdfs/lib/*.jar" >> $FLUME_HOME_DIR/conf/flume-env.sh
 
+echo "Configuring log4j.properties..."
+FLUME_LOG_DIR=$FLUME_HOME_DIR/logs
+mkdir -p $FLUME_LOG_DIR
+sed -i "/flume.log.dir=/cflume.log.dir=$FLUME_LOG_DIR" $FLUME_HOME_DIR/conf/log4j.properties
+
+mv $FLUME_HOME_DIR/lib/guava-*.jar $FLUME_HOME_DIR/lib/guava-*.jar.bak
 
 # configure on other flume node
 for ((i=1; i<${#FLUME_NODES[@]}; i++)); do

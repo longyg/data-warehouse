@@ -41,14 +41,11 @@ public class LogETLInterceptor implements Interceptor {
                 events.add(event);
             }
         }
-        log.info("===> ETL intercept");
         return events;
     }
 
     @Override
-    public void close() {
-        log.info("======> ETL close");
-    }
+    public void close() { }
 
     public static  class Builder implements Interceptor.Builder {
 

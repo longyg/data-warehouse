@@ -113,10 +113,13 @@
         <value>10485760</value>
     </property>
     <!-- 新文件的块大小，单位为字节.可使用后缀：k(kilo), m(mega), g(giga), t(tera), p(peta), e(exa) -->
+    <!-- 默认128M -->
+    <!--
     <property>
         <name>dfs.blocksize</name>
         <value>67108864</value>
     </property>
+    -->
     <!-- RPC服务器的监听client线程数， 默认为10-->
     <!-- 一般为 20 * log(datanode个数) -->
     <property>
