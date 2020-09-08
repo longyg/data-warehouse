@@ -20,7 +20,7 @@ case $1 in
 "start") {
 	for i in $FLUME_NODES; do
 		echo "--------------- 启动 $i 日志采集flume -----------------"
-		ssh $i "mkdir -p $FLUME_LOG_DIR; nohup $FLUME_BIN_DIR/flume-ng agent --conf $FLUME_CONF_DIR/ --name a1 --conf-file $FLUME_CONF_DIR/$CONF_FILE -Dflume.root.logger=INFO,LOGFILE >> $FLUME_LOG_DIR/data-collection.log 2>&1 &"
+		ssh $i "mkdir -p $FLUME_LOG_DIR; nohup $FLUME_BIN_DIR/flume-ng agent --conf $FLUME_CONF_DIR/ --name a1 --conf-file $FLUME_CONF_DIR/$CONF_FILE -Dflume.root.logger=DEBUG,LOGFILE >> $FLUME_LOG_DIR/data-collection.log 2>&1 &"
 	done
 };;
 "stop") {

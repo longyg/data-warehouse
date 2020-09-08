@@ -83,16 +83,23 @@ case $1 in
 	case $2 in
 	"start") {
 		zk.sh start "$CLUSTER_NODES"
+		sleep 2
 		kf.sh start "$CLUSTER_NODES"
+		sleep 2
 		hd.sh start "$CLUSTER_NODES"
+		sleep 2
 		hv.sh start $FIRST_NODE
 		hb.sh start
 	};;
 	"stop") {
 		hb.sh stop
+		sleep 2
 		hv.sh stop $FIRST_NODE
+		sleep 2
 		hd.sh stop "$CLUSTER_NODES"
+		sleep 2
 		kf.sh stop "$CLUSTER_NODES"
+		sleep 2
 		zk.sh stop "$CLUSTER_NODES"
 	};;
 	"status") {
