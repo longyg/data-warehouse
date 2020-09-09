@@ -64,6 +64,11 @@ cd $HIVE_HOME
 echo "Configuring hive-site.xml..."
 cp -f $SCRIPT_DIR/hive-site.xml $HIVE_HOME_DIR/conf/hive-site.xml
 
+echo "Configuring hive-log4j2.properties..."
+mv $HIVE_HOME_DIR/conf/hive-log4j2.properties.template $HIVE_HOME_DIR/conf/hive-log4j2.properties
+HIVE_LOG_DIR="$HIVE_HOME_DIR/logs"
+sed -i "/property.hive.log.dir = /cproperty.hive.log.dir = $HIVE_LOG_DIR" $HIVE_HOME_DIR/conf/hive-log4j2.properties
+
 echo "Copying mysql driver..."
 cp -f $SCRIPT_DIR/mysql-connector-java-*.jar $HIVE_HOME_DIR/lib/
 

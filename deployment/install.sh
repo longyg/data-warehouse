@@ -51,14 +51,18 @@ case $1 in
 "zookeeper") {
   $CUR_DIR/zookeeper/install_zookeeper_cluster.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
 };;
+"sqoop") {
+	$CUR_DIR/sqoop/install_sqoop.sh $INSTALL_DIR $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
+};;
 "all") {
   $CUR_DIR/zookeeper/install_zookeeper_cluster.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
   $CUR_DIR/hadoop/install_hadoop_cluster_ha.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
   $CUR_DIR/hbase/install_hbase_cluster.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
-  $CUR_DIR/phoenix/install_phoenix.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
   $CUR_DIR/hive/install_hive.sh $INSTALL_DIR $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
   $CUR_DIR/kafka/install_kafka_cluster.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
   $CUR_DIR/flume/install_flume.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
+  $CUR_DIR/phoenix/install_phoenix.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
+  $CUR_DIR/sqoop/install_sqoop.sh $INSTALL_DIR $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
 };;
 esac
 

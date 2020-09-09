@@ -18,6 +18,7 @@
     <modules>
         <module>log-generator</module>
         <module>flume-interceptor</module>
+        <module>bussiness-data-mock</module>
     </modules>
 
 
