@@ -36,8 +36,6 @@ import_data() {
   --query "$2 and \$CONDITIONS" \
   --num-mappers 1 \
   --fields-terminated-by '\t' \
-  #--compress \
-  #--compression-codec lzop \
   --null-string '\\N' \
   --null-non-string '\\N'
 }
