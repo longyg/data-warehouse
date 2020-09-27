@@ -50,8 +50,7 @@ load data inpath '/origin_data/$APP/db/base_region/$do_date' overwrite into tabl
 
 case $1 in
 "first") {
-	hive -e "$sql1"
-	hive -e "$sql2"
+	hive -e "$sql1$sql2"
 };;
 "all") {
 	hive -e "$sql1"
