@@ -83,6 +83,9 @@ cp -f $SCRIPT_DIR/mapred-site.xml $HADOOP_HOME_DIR/etc/hadoop/mapred-site.xml
 echo "Configuring yarn-site.xml..."
 cp -f $SCRIPT_DIR/yarn-site.xml $HADOOP_HOME_DIR/etc/hadoop/yarn-site.xml
 
+echo "Copying lzo jar..."
+cp -f $SCRIPT_DIR/hadoop-lzo-*.jar $HADOOP_HOME_DIR/share/hadoop/common/hadoop-lzo.jar
+
 echo "Configuring workers..."
 rm -rf $HADOOP_HOME_DIR/etc/hadoop/workers
 for node in ${HADOOP_NODES[@]}; do
