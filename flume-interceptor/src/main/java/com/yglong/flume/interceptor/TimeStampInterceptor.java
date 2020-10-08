@@ -1,13 +1,15 @@
 package com.yglong.flume.interceptor;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.interceptor.Interceptor;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
-public class ETLInterceptor implements Interceptor {
+public class TimeStampInterceptor implements Interceptor {
     @Override
     public void initialize() {
 
@@ -17,15 +19,18 @@ public class ETLInterceptor implements Interceptor {
     public Event intercept(Event event) {
         byte[] body = event.getBody();
         String log = new String(body, StandardCharsets.UTF_8);
-        if (JSONUtils.isValid(log)) {
-            return event;
-        }
-        return null;
+        JSONObject jsonObject = JSONObject.parseObject(log);
+        String ts = jsonObject.getString("ts");
+        Map<String, String> headers = event.getHeaders();
+        headers.put("timestamp", ts);
+        return event;
     }
 
     @Override
     public List<Event> intercept(List<Event> list) {
-        list.removeIf(event -> intercept(event) == null);
+        for (Event event : list) {
+            intercept(event);
+        }
         return list;
     }
 
@@ -38,7 +43,7 @@ public class ETLInterceptor implements Interceptor {
 
         @Override
         public Interceptor build() {
-            return new ETLInterceptor();
+            return new TimeStampInterceptor();
         }
 
         @Override

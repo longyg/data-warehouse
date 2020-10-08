@@ -1,6 +1,6 @@
 package com.yglong.flume.interceptor;
 
-import org.mortbay.util.ajax.JSON;
+import com.alibaba.fastjson.JSON;
 
 public class JSONUtils {
     public static boolean isValid(String log) {
