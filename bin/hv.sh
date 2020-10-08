@@ -18,7 +18,7 @@ case $1 in
 };;
 "stop") {
 	echo "--------------- 停止 hiveserver2 on $HIVE_NODE  ------------------"
-	ssh $HIVE_NODE "ps -ef | grep org.apache.hive.service.server.HiveServer2 | grep -v grep | awk '{print \$2}' | xargs kill"
+	ssh $HIVE_NODE "ps -ef | grep org.apache.hive.service.server.HiveServer2 | grep -v grep | awk '{print \$2}' | xargs -n1 kill -9"
 };;
 "status") {
 	xcall "jps | grep -i RunJar"

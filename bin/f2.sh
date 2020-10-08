@@ -26,7 +26,7 @@ case $1 in
 "stop") {
 	for i in $FLUME_NODES; do
 		echo "--------------- 停止 $i 存储日志flume -----------------"
-		ssh $i "ps -ef | grep $CONF_FILE | grep -v grep | awk '{print \$2}' | xargs kill"
+		ssh $i "ps -ef | grep $CONF_FILE | grep -v grep | awk '{print \$2}' | xargs -n1 kill -9"
 	done
 };;
 esac
