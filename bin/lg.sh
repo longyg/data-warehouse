@@ -12,5 +12,5 @@
 NODES="bigdata01 bigdata02"
 
 for i in $NODES; do
-	ssh $i "java -jar /opt/software/data-generation/log/gmall2020-mock-log-2020-04-01.jar >/dev/null 2>&1 &"
+	ssh $i "cd /opt/software/data-generation/log; java -jar gmall2020-mock-log-2020-04-01.jar >/dev/null 2>&1 &"
 done
