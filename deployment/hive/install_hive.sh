@@ -69,6 +69,9 @@ mv $HIVE_HOME_DIR/conf/hive-log4j2.properties.template $HIVE_HOME_DIR/conf/hive-
 HIVE_LOG_DIR="$HIVE_HOME_DIR/logs"
 sed -i "/property.hive.log.dir = /cproperty.hive.log.dir = $HIVE_LOG_DIR" $HIVE_HOME_DIR/conf/hive-log4j2.properties
 
+#echo "Backup log4j-slf4j-impl jar..."
+#mv $HIVE_HOME_DIR/lib/log4j-slf4j-impl-*.jar $HIVE_HOME_DIR/lib/log4j-slf4j-impl.jar.bak
+
 echo "Copying mysql driver..."
 cp -f $SCRIPT_DIR/mysql-connector-java-*.jar $HIVE_HOME_DIR/lib/
 

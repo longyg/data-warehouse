@@ -19,11 +19,10 @@ HDFS_DIR="/origin_data/gmall/db"
 
 source /etc/profile
 
-# 2020-09-09
-do_date=`date -d '-1 day' +%F`
-
-if [[ -n "$2" ]]; then
-  do_date=$2
+if [ -n "$2" ]; then
+	do_date=$2
+else
+	do_date=`date -d '-1 day' +%F`
 fi
 
 import_data() {
@@ -36,8 +35,12 @@ import_data() {
   --query "$2 and \$CONDITIONS" \
   --num-mappers 1 \
   --fields-terminated-by '\t' \
+  --compress \
+  --compression-codec lzop \
   --null-string '\\N' \
   --null-non-string '\\N'
+
+  hadoop jar /opt/software/hadoop/share/hadoop/common/hadoop-lzo.jar com.hadoop.compression.lzo.DistributedLzoIndexer $HDFS_DIR/$1/$do_date
 }
 
 import_order_info() {

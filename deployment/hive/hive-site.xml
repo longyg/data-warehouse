@@ -88,10 +88,12 @@
         <name>datanucleus.autoCreateColumns</name>
         <value>true</value>
     </property>
+	<!--
     <property>
         <name>hive.metastore.local</name>
         <value>true</value>
     </property>
+	-->
     <!-- 显示表的列名 -->
     <property>
         <name>hive.cli.print.header</name>
@@ -102,4 +104,19 @@
         <name>hive.cli.print.current.db</name>
         <value>true</value>
     </property>
+	
+<!--
+	<property>
+        <name>spark.yarn.jars</name>
+        <value>hdfs://hdcluster/spark-jars/*</value>
+	</property>
+	<property>
+		<name>hive.execution.engine</name>
+		<value>spark</value>
+	</property>
+	<property>
+		<name>hive.spark.client.connect.timeout</name>
+		<value>10000ms</value>
+	</property>
+-->
 </configuration>
