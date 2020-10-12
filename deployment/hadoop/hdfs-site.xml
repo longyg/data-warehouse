@@ -1,21 +1,16 @@
 <configuration>
-    <!-- 文件在HDFS中的备份数(小于等于NameNode) -->
     <property>
         <name>dfs.replication</name>
         <value>1</value>
     </property>
     <property>
         <name>dfs.namenode.secondary.http-address</name>
-        <value>bigdata03:8020</value>
+        <value>bigdata03:9868</value>
     </property>
-
-    <!-- RPC服务器的监听client线程数， 默认为10-->
-    <!-- 一般为 20 * log(datanode个数) -->
     <property>
         <name>dfs.namenode.handler.count</name>
         <value>22</value>
     </property>
-    <!-- 关闭HDFS的访问权限 -->
     <property>
         <name>dfs.permissions.enabled</name>
         <value>false</value>

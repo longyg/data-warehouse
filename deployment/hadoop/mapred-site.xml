@@ -1,34 +1,14 @@
 <configuration>
-    <!--用于执行MapReduce作业的运行时框架。可以是本地，classic或yarn之一-->
     <property>
         <name>mapreduce.framework.name</name>
         <value>yarn</value>
     </property>
     <property>
-        <name>yarn.app.mapreduce.am.env</name>
-        <value>HADOOP_MAPRED_HOME=/opt/software/hadoop</value>
+        <name>mapreduce.jobhistory.address</name>
+        <value>bigdata01:10020</value>
     </property>
     <property>
-        <name>mapreduce.map.env</name>
-        <value>HADOOP_MAPRED_HOME=/opt/software/hadoop</value>
-    </property>
-    <property>
-        <name>mapreduce.reduce.env</name>
-        <value>HADOOP_MAPRED_HOME=/opt/software/hadoop</value>
-    </property>
-	<!--一个 Map Task 可使用的内存上限,单位MB，默认1024，如果 Map Task 实际使用的资源量超过该值，则会被强制杀死-->
-    <property>
-        <name>mapreduce.map.memory.mb</name>
-        <value>2048</value>
-    </property>
-    <!--Reduce Task 的 JVM 参数-->
-    <property>
-        <name>mapreduce.reduce.java.opts</name>
-        <value>-Xmx2048m</value>
-    </property>
-    <!--一个 Reduce Task 可使用的内存上限,单位MB，默认1024，如果 Reduce Task 实际使用的资源量超过该值，则会被强制杀死-->
-    <property>
-        <name>mapreduce.reduce.memory.mb</name>
-        <value>2048</value>
+        <name>mapreduce.jobhistory.webapp.address</name>
+        <value>bigdata01:19888</value>
     </property>
 </configuration>

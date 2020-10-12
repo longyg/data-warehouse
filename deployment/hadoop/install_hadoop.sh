@@ -24,8 +24,6 @@ HADOOP_GROUP_NAME=$4
 DOWNLOAD_DIR=$5
 HADOOP_HOME_DIR="$INSTALL_DIR/hadoop"
 JAVA_HOME_DIR=$(echo $JAVA_HOME)
-HADOOP_ROOT_DIR="/opt"
-HADOOP_DATA_DIR="$HADOOP_ROOT_DIR/hadoopdata"
 
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 
@@ -63,11 +61,11 @@ echo $HADOOP_HOME
 
 echo "Configuring hadoop-env.sh..."
 echo "export JAVA_HOME=$JAVA_HOME_DIR" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
-echo "export HDFS_NAMENODE_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
-echo "export HDFS_DATANODE_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
-echo "export HDFS_SECONDARYNAMENODE_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
-echo "export YARN_RESOURCEMANAGER_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
-echo "export YARN_NODEMANAGER_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
+#echo "export HDFS_NAMENODE_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
+#echo "export HDFS_DATANODE_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
+#echo "export HDFS_SECONDARYNAMENODE_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
+#echo "export YARN_RESOURCEMANAGER_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
+#echo "export YARN_NODEMANAGER_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
 
 echo "Configuring core-site.xml..."
 cp -f $SCRIPT_DIR/core-site.xml $HADOOP_HOME_DIR/etc/hadoop/core-site.xml
@@ -104,14 +102,16 @@ for node in ${HADOOP_NODES[@]}; do
 	ssh $node "chown -R $HADOOP_USER_NAME:$HADOOP_GROUP_NAME $HADOOP_HOME_DIR"
 done
 
-for node in ${HADOOP_NODES[@]}; do
-	ssh $node "rm -rf $HADOOP_DATA_DIR"
-	ssh $node "mkdir -p $HADOOP_DATA_DIR"
-	ssh $node "chown -R $HADOOP_USER_NAME:$HADOOP_GROUP_NAME $HADOOP_DATA_DIR"
-done
-
 echo "Formating namenode..."
 su - $HADOOP_USER_NAME -c "hdfs namenode -format"
 
-echo "Starting hadoop cluster..."
-su - $HADOOP_USER_NAME -c "start-all.sh"
+echo "Starting HDFS..."
+su - $HADOOP_USER_NAME -c "start-dfs.sh"
+
+echo "Starting YARN..."
+ssh ${HADOOP_NODES[1]} "su - $HADOOP_USER_NAME -c \"source /etc/profile; start-yarn.sh\""
+
+echo "Starting history server..."
+su - $HADOOP_USER_NAME -c "mapred --daemon start historyserver"
+
+

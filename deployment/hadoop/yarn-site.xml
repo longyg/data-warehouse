@@ -3,48 +3,44 @@
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
-	<!--yarn.nodemanager.resource.memory-mb   可以为容器分配的物理内存量（MB）。如果设置为-1且yarn.nodemanager.resource.detect-hardware-capabilities为true，则会自动计算（如果是Windows和Linux）。在其他情况下，默认值为8192MB-->。
     <property>
         <name>yarn.nodemanager.resource.memory-mb</name>
-        <value>2048</value>
+        <value>4096</value>
     </property>
-    <!--RM中每个容器请求的最大分配内存，以MB为单位。高于此的内存请求将抛出InvalidResourceRequestException-->。
     <property>
         <name>yarn.scheduler.maximum-allocation-mb</name>
-        <value>12288</value>
+        <value>4096</value>
     </property>
-	<!--RM中每个容器请求的最小分配（MB）内存-->
     <property>
         <name>yarn.scheduler.minimum-allocation-mb</name>
-        <value>128</value>
+        <value>512</value>
     </property>
-	<!--是否将对容器强制实施物理内存限制。-->
     <property>
         <name>yarn.nodemanager.pmem-check-enabled</name>
-        <value>true</value>
-    </property>
-	<!--设置容器的内存限制时虚拟内存与物理内存之间的比率-->
-    <property>
-        <name>yarn.nodemanager.vmem-pmem-ratio</name>
-        <value>8</value>
-    </property>
-	<!--linux-container-executor应该运行的UNIX组-->
-    <property>
-        <name>yarn.nodemanager.linux-container-executor.group</name>
-        <value>bigdata</value>
+        <value>false</value>
     </property>
     <property>
-        <name>yarn.nodemanager.resource.percentage-physical-cpu-limit</name>
-        <value>100</value>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
     </property>
-    <property>
-        <name>yarn.scheduler.minimum-allocation-vcores</name>
-        <value>1</value>
-    </property>
-    <!--
     <property>
         <name>yarn.resourcemanager.hostname</name>
         <value>bigdata02</value>
     </property>
-    -->
+    <property>
+		<name>yarn.nodemanager.env-whitelist</name>
+		<value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+    </property>
+    <property>
+        <name>yarn.log-aggregation.enable</name>
+		<value>true</value>
+    </property>
+    <property>
+    	<name>yarn.log.server.url</name>
+		<value>http://bigdata01:19888/jobhistory/logs</value>
+    </property>
+    <property>
+        <name>yarn.log-aggregation.retain-seconds</name>
+		<value>604800</value>
+    </property>
 </configuration>

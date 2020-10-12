@@ -1,9 +1,11 @@
 <configuration>
+	<!--
 	<property>
 		<name>hive.metastore.warehouse.dir</name>
         <value>hdfs://bigdata01:8020/hive/warehouse</value>
         <description>location to default database for the warehouse</description>
 	</property>
+	-->
 	
     <!--指定元数据库连接信息-->
     <property>

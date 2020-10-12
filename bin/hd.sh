@@ -13,19 +13,22 @@ HADOOP_NODES=$2
 
 case $1 in
 "start") {
-	echo "--------------- 启动 Hadoop ------------------"
-	start-all.sh
-#	for node in ${HADOOP_NODES[@]}; do
-#		echo "--------------- 启动 mapreduce history server on $node ---------------"
-#		ssh $node "source /etc/profile; mapred --daemon start historyserver"
-#	done
+	echo "================= 启动 Hadoop集群 ================="
+	echo "------------- 启动 HDFS -------------"
+	ssh bigdata01 "/opt/software/hadoop/sbin/start-dfs.sh"
+	echo "------------- 启动 YARN -------------"
+	ssh bigdata02 "/opt/software/hadoop/sbin/start-yarn.sh"
+	echo "------------- 启动 history server -------------"
+	ssh bigdata01 "/opt/software/hadoop/bin/mapred --daemon start historyserver"
 };;
 "stop") {
-#	for node in ${HADOOP_NODES[@]}; do
-#		echo "--------------- 停止 mapreduce history server on $node ---------------"
-#		ssh $node "source /etc/profile; mapred --daemon stop historyserver"
-#	done
-	stop-all.sh
+	echo "================= 关闭 Hadoop集群 ================="
+	echo "------------- 关闭 history server -------------"
+	ssh bigdata01 "/opt/software/hadoop/bin/mapred --daemon stop historyserver"
+	echo "------------- 关闭 YARN -------------"
+	ssh bigdata02 "/opt/software/hadoop/sbin/stop-yarn.sh"
+	echo "------------- 关闭 HDFS -------------"
+	ssh bigdata01 "/opt/software/hadoop/sbin/stop-dfs.sh"
 };;
 "status") {
 	xcall "jps | grep -i -E \"NameNode|DataNode|JournalNode|DFSZKFailoverController|ResourceManager|NodeManager|JobHistoryServer\""

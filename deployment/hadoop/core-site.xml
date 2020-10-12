@@ -1,20 +1,16 @@
 <configuration>
-    <!-- Hadoop工作目录,用于存放Hadoop运行时NameNode、DataNode产生的数据 -->
     <property>
         <name>hadoop.tmp.dir</name>
-        <value>/opt/hadoopdata</value>
+		<value>/opt/software/hadoop/data</value>
     </property>
-    <!-- 默认NameNode,使用NameService的名称 -->
     <property>
         <name>fs.defaultFS</name>
         <value>hdfs://bigdata01:8020</value>
     </property>
-    <!-- 在网页界面访问数据时使用的用户 -->
     <property>
         <name>hadoop.http.staticuser.user</name>
         <value>bigdata</value>
     </property>
-    <!--压缩和解压的方式-->
     <property>
         <name>io.compression.codecs</name>
         <value>

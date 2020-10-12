@@ -24,6 +24,8 @@ JAVA_HOME_DIR=$(echo $JAVA_HOME)
 SPARK_HOME_DIR="$INSTALL_DIR/spark"
 HADOOP_HOME_DIR="$INSTALL_DIR/hadoop"
 
+SCRIPT_DIR=$(dirname $(readlink -f "$0"))
+
 echo "Downloading spark..."
 mkdir -p $DOWNLOAD_DIR
 cd $DOWNLOAD_DIR
@@ -60,4 +62,9 @@ echo "Configuring spark-env.sh..."
 mv $SPARK_HOME_DIR/conf/spark-env.sh.template $SPARK_HOME_DIR/conf/spark-env.sh
 echo "export HADOOP_CONF_DIR=$HADOOP_HOME_DIR/etc/hadoop" >> $SPARK_HOME_DIR/conf/spark-env.sh
 
+echo "Configuring spark-defaults.conf..."
+cp -f $SCRIPT_DIR/spark-defaults.conf $SPARK_HOME_DIR/conf/spark-defaults.conf
+
 chown -R $SPARK_USER_NAME:$SPARK_GROUP_NAME $SPARK_HOME_DIR
+
+su - $SPARK_USER_NAME -c "hadoop fs -mkdir -p /spark-history"
