@@ -75,8 +75,8 @@ sed -i "/property.hive.log.dir = /cproperty.hive.log.dir = $HIVE_LOG_DIR" $HIVE_
 echo "Copying mysql driver..."
 cp -f $SCRIPT_DIR/mysql-connector-java-*.jar $HIVE_HOME_DIR/lib/
 
-rm $HIVE_HOME_DIR/lib/guava-*.jar
-cp -f /opt/software/hadoop/share/hadoop/common/lib/guava-*.jar $HIVE_HOME_DIR/lib/
+#rm $HIVE_HOME_DIR/lib/guava-*.jar
+#cp -f /opt/software/hadoop/share/hadoop/common/lib/guava-*.jar $HIVE_HOME_DIR/lib/
 
 chown -R $HIVE_USER_NAME:$HIVE_GROUP_NAME $HIVE_HOME_DIR
 

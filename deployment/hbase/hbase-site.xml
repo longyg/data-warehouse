@@ -2,7 +2,7 @@
     <!-- 在hdfs中用于持久化hbase数据的目录 -->
     <property>
         <name>hbase.rootdir</name>
-        <value>hdfs://hdcluster/hbase</value>
+        <value>hdfs://bigdata01:8020/hbase</value>
     </property>
 
     <!-- 是否分布式运行，false即为单机 -->

@@ -4,17 +4,19 @@
         <name>mapreduce.framework.name</name>
         <value>yarn</value>
     </property>
-    <!--mapred做本地计算的目录，可配置多块硬盘用逗号分隔-->
     <property>
-        <name>mapred.local.dir</name>
-        <value>/opt/hadoopdata/yarn/local</value>
+        <name>yarn.app.mapreduce.am.env</name>
+        <value>HADOOP_MAPRED_HOME=/opt/software/hadoop</value>
     </property>
-    <!--Map Task 的 JVM 参数-->
     <property>
-        <name>mapreduce.map.java.opts</name>
-        <value>-Xmx4096m</value>
+        <name>mapreduce.map.env</name>
+        <value>HADOOP_MAPRED_HOME=/opt/software/hadoop</value>
     </property>
-    <!--一个 Map Task 可使用的内存上限,单位MB，默认1024，如果 Map Task 实际使用的资源量超过该值，则会被强制杀死-->
+    <property>
+        <name>mapreduce.reduce.env</name>
+        <value>HADOOP_MAPRED_HOME=/opt/software/hadoop</value>
+    </property>
+	<!--一个 Map Task 可使用的内存上限,单位MB，默认1024，如果 Map Task 实际使用的资源量超过该值，则会被强制杀死-->
     <property>
         <name>mapreduce.map.memory.mb</name>
         <value>2048</value>
@@ -28,42 +30,5 @@
     <property>
         <name>mapreduce.reduce.memory.mb</name>
         <value>2048</value>
-    </property>
-    <!--mapreduce.jobhistory.cleaner.interval-ms  作业历史记录清理程序检查要删除的文件的频率（以毫秒为单位）。默认为86400000（一天）。仅当文件早于mapreduce.jobhistory.max-age-ms时才会删除文件-->
-    <property>
-        <name>mapreduce.jobhistory.cleaner.interval-ms</name>
-        <value>86400000</value>
-    </property>
-    <!--作业列表缓存的大小,默认20000-->
-    <property>
-        <name>mapreduce.jobhistory.joblist.cache.size</name>
-        <value>20000</value>
-    </property>
-    <!--日期字符串缓存的大小。影响将扫描以查找作业的目录数-->
-    <property>
-        <name>mapreduce.jobhistory.datestring.cache.size</name>
-        <value>200000</value>
-    </property>
-    <property>
-        <name>mapreduce.jobhistory.cleaner.enable</name>
-        <value>true</value>
-    </property>
-    <!--运行历史记录清理程序时，将删除早于此毫秒的作业历史记录文件。默认为604800000（1周）-->
-    <property>
-        <name>mapreduce.jobhistory.max-age-ms</name>
-        <value>604800000</value>
-    </property>
-
-    <property>
-        <name>yarn.app.mapreduce.am.env</name>
-        <value>HADOOP_MAPRED_HOME=/opt/software/hadoop</value>
-    </property>
-    <property>
-        <name>mapreduce.map.env</name>
-        <value>HADOOP_MAPRED_HOME=/opt/software/hadoop</value>
-    </property>
-    <property>
-        <name>mapreduce.reduce.env</name>
-        <value>HADOOP_MAPRED_HOME=/opt/software/hadoop</value>
     </property>
 </configuration>

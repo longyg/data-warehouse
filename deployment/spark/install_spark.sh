@@ -1,7 +1,7 @@
 #!/bin/bash
 ###############################################################################
 #
-# Install Spark 3.0.x
+# Install Spark 3.0.0
 #
 # Prerequisites:
 #   - Hadoop is installed and running
@@ -28,7 +28,7 @@ echo "Downloading spark..."
 mkdir -p $DOWNLOAD_DIR
 cd $DOWNLOAD_DIR
 if [ ! -f spark-*.tgz ]; then
-	wget http://mirror.netinch.com/pub/apache/spark/spark-3.0.1/spark-3.0.1-bin-hadoop3.2.tgz
+	wget https://archive.apache.org/dist/spark/spark-3.0.0/spark-3.0.0-bin-hadoop3.2.tgz
 fi
 
 if [ ! -f spark-*.tgz ]; then

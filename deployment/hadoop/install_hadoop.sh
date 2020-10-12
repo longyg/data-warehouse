@@ -2,12 +2,10 @@
 
 ###############################################################################
 #
-# Install and start hadoop 3.2.1 fully distributed cluster
-# Also NameNode HA and ResourceManager HA are both enabled
+# Install and start hadoop 3.1.3 fully distributed cluster without HA
 #
 # Prerequisites:
 #   - JDK is installed and JAVA_HOME env is configured
-#   - Zookeeper cluster is running
 #   - hostname is configured for every node
 #   - ssh login without password between all nodes is configured for both
 #     root and non-root user
@@ -28,18 +26,17 @@ HADOOP_HOME_DIR="$INSTALL_DIR/hadoop"
 JAVA_HOME_DIR=$(echo $JAVA_HOME)
 HADOOP_ROOT_DIR="/opt"
 HADOOP_DATA_DIR="$HADOOP_ROOT_DIR/hadoopdata"
-HADOOP_JOURNALNODE_DATA_DIR="$HADOOP_ROOT_DIR/journalnode/data"
 
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 
 echo "Downloading hadoop..."
 mkdir -p $DOWNLOAD_DIR
 cd $DOWNLOAD_DIR
-if [ ! -f hadoop-*.tar.gz ]; then
-	wget http://us.mirrors.quenda.co/apache/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
+if [ ! -f hadoop-3.1.3.tar.gz ]; then
+	wget https://archive.apache.org/dist/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz
 fi
 
-if [ ! -f hadoop-*.tar.gz ]; then
+if [ ! -f hadoop-3.1.3.tar.gz ]; then
 	echo "Download hadoop failed, exit"
 	exit 1
 fi
@@ -49,9 +46,9 @@ cd $INSTALL_DIR
 
 echo "Unpacking hadoop..."
 rm -rf $HADOOP_HOME_DIR
-cp $DOWNLOAD_DIR/hadoop-*.tar.gz ./
-tar -zxvf hadoop-*.tar.gz > /dev/null 2>&1
-rm hadoop-*.tar.gz
+cp $DOWNLOAD_DIR/hadoop-3.1.3.tar.gz ./
+tar -zxvf hadoop-3.1.3.tar.gz > /dev/null 2>&1
+rm hadoop-3.1.3.tar.gz
 mv hadoop* hadoop
 
 echo "Configuring environment..."
@@ -68,8 +65,9 @@ echo "Configuring hadoop-env.sh..."
 echo "export JAVA_HOME=$JAVA_HOME_DIR" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
 echo "export HDFS_NAMENODE_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
 echo "export HDFS_DATANODE_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
-echo "export HDFS_ZKFC_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
-echo "export HDFS_JOURNALNODE_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
+echo "export HDFS_SECONDARYNAMENODE_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
+echo "export YARN_RESOURCEMANAGER_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
+echo "export YARN_NODEMANAGER_USER=$HADOOP_USER_NAME" >> $HADOOP_HOME_DIR/etc/hadoop/hadoop-env.sh
 
 echo "Configuring core-site.xml..."
 cp -f $SCRIPT_DIR/core-site.xml $HADOOP_HOME_DIR/etc/hadoop/core-site.xml
@@ -107,15 +105,6 @@ for node in ${HADOOP_NODES[@]}; do
 done
 
 for node in ${HADOOP_NODES[@]}; do
-	echo "Configuring data directory on $node..."
-	ssh $node "rm -rf $HADOOP_DATA_DIR; mkdir -p $HADOOP_DATA_DIR; chown -R $HADOOP_USER_NAME:$HADOOP_GROUP_NAME $HADOOP_DATA_DIR"
-	ssh $node "rm -rf $HADOOP_JOURNALNODE_DATA_DIR; mkdir -p $HADOOP_JOURNALNODE_DATA_DIR; chown -R $HADOOP_USER_NAME:$HADOOP_GROUP_NAME $HADOOP_JOURNALNODE_DATA_DIR"
-	echo "Starting journalnode on $node..."
-	ssh $node "su - $HADOOP_USER_NAME -c \"hdfs --daemon start journalnode\""
-	ssh $node "jps"
-done
-
-for node in ${HADOOP_NODES[@]}; do
 	ssh $node "rm -rf $HADOOP_DATA_DIR"
 	ssh $node "mkdir -p $HADOOP_DATA_DIR"
 	ssh $node "chown -R $HADOOP_USER_NAME:$HADOOP_GROUP_NAME $HADOOP_DATA_DIR"
@@ -124,29 +113,5 @@ done
 echo "Formating namenode..."
 su - $HADOOP_USER_NAME -c "hdfs namenode -format"
 
-echo "Copying metadata to second namenode..."
-node2=${HADOOP_NODES[1]}
-rsync -az --delete $HADOOP_DATA_DIR $node2:$HADOOP_ROOT_DIR/
-
-echo "Formating ZKFC..."
-su - $HADOOP_USER_NAME -c "hdfs zkfc -formatZK"
-
 echo "Starting hadoop cluster..."
 su - $HADOOP_USER_NAME -c "start-all.sh"
-
-for node in ${HADOOP_NODES[@]}; do
-	echo "Starting mapreduce history server on $node..."
-	ssh $node "su - $HADOOP_USER_NAME -c \"mapred --daemon start historyserver\""
-	ssh $node "jps"
-done
-
-
-
-
-
-
-
-
-
-
-

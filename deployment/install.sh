@@ -33,8 +33,11 @@ case $1 in
 "flume") {
   $CUR_DIR/flume/install_flume.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
 };;
+"hadoop_ha") {
+  $CUR_DIR/hadoop_ha/install_hadoop_cluster_ha.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
+};;
 "hadoop") {
-  $CUR_DIR/hadoop/install_hadoop_cluster_ha.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
+  $CUR_DIR/hadoop/install_hadoop.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
 };;
 "hbase") {
   $CUR_DIR/hbase/install_hbase_cluster.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
@@ -59,7 +62,7 @@ case $1 in
 };;
 "all") {
   $CUR_DIR/zookeeper/install_zookeeper_cluster.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
-  $CUR_DIR/hadoop/install_hadoop_cluster_ha.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
+  $CUR_DIR/hadoop/install_hadoop.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
   $CUR_DIR/hbase/install_hbase_cluster.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
   $CUR_DIR/hive/install_hive.sh $INSTALL_DIR $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
   $CUR_DIR/kafka/install_kafka_cluster.sh $INSTALL_DIR "$CLUSTER_NODES" $USER_NAME $GROUP_NAME $DOWNLOAD_DIR
