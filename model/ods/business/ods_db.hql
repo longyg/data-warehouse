@@ -1,3 +1,7 @@
+create database if not exists gmall;
+use gmall;
+
+
 drop table if exists ods_activity_info;
 create external table ods_activity_info(
     `id` string COMMENT '编号',

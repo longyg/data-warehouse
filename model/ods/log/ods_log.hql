@@ -1,3 +1,7 @@
+create database if not exists gmall;
+use gmall;
+
+
 drop table if exists ods_log;
 
 create external table ods_log (
