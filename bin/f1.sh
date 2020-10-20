@@ -2,10 +2,12 @@
 
 #########################################
 #
-# Start or stop flume log collection
+# 启动或停止用户行为日志收集flume
+#
+# - 从日志文件收集用户行为日志，并存储到kafka topic中
 #
 # Usage:
-#      f1.sh start|stop
+#      f1.sh <start|stop>
 #
 #########################################
 

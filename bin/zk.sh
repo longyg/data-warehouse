@@ -5,7 +5,7 @@
 # start, stop or check status of zookeeper cluster
 #
 # Usage:
-#      zk.sh start|stop|status
+#      zk.sh <start|stop|status> <nodes>
 #
 ###############################################################################
 

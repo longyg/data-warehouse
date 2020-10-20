@@ -5,7 +5,7 @@
 # Start or stop hbase
 #
 # Usage:
-#      hb.sh start|stop|status
+#      hb.sh <start|stop|status>
 #
 ###############################################################################
 case $1 in
@@ -18,6 +18,7 @@ case $1 in
 	stop-hbase.sh
 };;
 "status") {
+	echo "--------------- 检查 HBase 状态 ------------------"
 	xcall "jps | grep -i -E \"HMaster|HRegionServer\""
 }
 esac

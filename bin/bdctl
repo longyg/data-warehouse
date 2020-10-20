@@ -7,7 +7,7 @@
 # Orchestration script for start, stop or check status of bigdata frameworks
 #
 # Usage:
-#      dbctl all|kafka|hive|hbase|hadoop|zookeeper start|stop|status
+#      dbctl <all|kafka|hive|hbase|hadoop|zookeeper> <start|stop|status>
 #
 ###############################################################################
 CLUSTER_NODES="bigdata01 bigdata02 bigdata03"

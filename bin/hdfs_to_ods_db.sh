@@ -5,9 +5,9 @@
 # Load business data from hdfs to ods db tables in hive
 #
 # Usage:
-#      hdfs_to_ods_db.sh [date]
+#      hdfs_to_ods_db.sh <first|all> <date>
 # Example:
-#      hdfs_to_ods_db.sh [2020-09-01]
+#      hdfs_to_ods_db.sh first 2020-10-01
 #
 ###############################################################################
 

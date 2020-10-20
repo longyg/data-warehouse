@@ -5,7 +5,7 @@
 # Start or stop kafka cluster
 #
 # Usage:
-#      kf.sh start|stop|status nodes
+#      kf.sh <start|stop|status> <nodes>
 #
 ###############################################################################
 

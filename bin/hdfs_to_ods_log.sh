@@ -5,9 +5,9 @@
 # Load log data from hdfs to ods_log tables in hive
 #
 # Usage:
-#      hdfs_to_ods_log.sh [date]
+#      hdfs_to_ods_log.sh <date>
 # Example:
-#      hdfs_to_ods_log.sh [2020-09-01]
+#      hdfs_to_ods_log.sh 2020-10-01
 #
 ###############################################################################
 
@@ -21,10 +21,6 @@ else
 fi
 
 echo "=============日志日期：$do_date============"
-#sql="
-#load data inpath '/origin_data/$APP/log/topic_start/$do_date' overwrite into table ${APP}.ods_start_log partition (dt='$do_date');
-#load data inpath '/origin_data/$APP/log/topic_event/$do_date' overwrite into table ${APP}.ods_event_log partition (dt='$do_date');
-#"
 
 sql="
 load data inpath '/origin_data/$APP/log/topic_log/$do_date' overwrite into table ${APP}.ods_log partition (dt='$do_date');

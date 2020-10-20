@@ -5,9 +5,9 @@
 # Import data from MySQL to HDFS using Sqoop
 #
 # Usage:
-#      mysql_to_hdfs.sh first|all <date>
+#      mysql_to_hdfs.sh <first|all> <date>
 # Example:
-#      mysql_to_hdfs.sh all 2020-09-09
+#      mysql_to_hdfs.sh first 2020-10-01
 #
 ###############################################################################
 
@@ -121,13 +121,15 @@ import_order_detail() {
   # 过滤并导入新增的数据
   import_data order_detail "select
                         od.id       ,
-                        order_id    ,
-                        user_id     ,
-                        sku_id      ,
-                        sku_name    ,
-                        order_price ,
-                        sku_num     ,
-                        od.create_time
+                        od.order_id    ,
+                        oi.user_id     ,
+                        od.sku_id      ,
+                        od.sku_name    ,
+                        od.order_price ,
+                        od.sku_num     ,
+                        od.create_time,
+						od.source_type,
+						od.source_id
                     from order_detail od
                     join order_info oi
                     on od.order_id = oi.id
@@ -284,7 +286,9 @@ import_cart_info() {
                         create_time  ,
                         operate_time ,
                         is_ordered   ,
-                        order_time
+                        order_time   ,
+						source_type  ,
+						source_id
                     from cart_info where 1=1"
 }
 

@@ -5,7 +5,7 @@
 # Start or stop hiveserver2
 #
 # Usage:
-#      hv.sh start|stop|status node
+#      hv.sh <start|stop|status> <node>
 #
 ###############################################################################
 
